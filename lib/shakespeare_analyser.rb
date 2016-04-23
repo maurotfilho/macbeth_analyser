@@ -8,11 +8,13 @@ class ShakespeareAnalyser
   end
 
   def run
-    doc = Nokogiri::XML(xml)
-    speaker_item = doc.at('SPEAKER')
-    if speaker_item
-      speaker = speaker_item.text
-      { speaker => 1 }
+    if !xml.empty?
+      doc = Nokogiri::XML(xml)
+      speech_item = doc.css('SPEECH')
+      results = {}
+      speaker = speech_item.at('SPEAKER').text
+      lines = speech_item.css('LINE').size
+      { speaker => lines }
     else
       {}
     end

@@ -23,5 +23,20 @@ describe ShakespeareAnalyser do
       expect(analyser.run).to eq({'Third Witch' => 1})
     end
 
+    it "should count the lines containing one speaker and multiple lines" do
+      @xml = '
+        <PLAY>
+          <SPEECH>
+            <SPEAKER>DUNCAN</SPEAKER>
+            <LINE>What bloody man is that? He can report,</LINE>
+            <LINE>As seemeth by his plight, of the revolt</LINE>
+            <LINE>The newest state.</LINE>
+          </SPEECH>
+        </PLAY>
+      '
+      expect(analyser.run).to eq({'DUNCAN' => 3})
+    end
+
+
   end
 end
